@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Слот-машина</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Глобальные кнопки -->
+<button id="muteBtn" title="Звук">🔊</button>
+<button id="adminToggleBtn" title="Админ-панель">👑</button>
+
+<!-- ============ ЭКРАН ВХОДА ============ -->
+<div id="loginScreen" class="screen">
+  <div class="machine">
+    <h1>🎰 СЛОТ-МАШИНА</h1>
+    <p class="login-hint">Введите ваше имя, чтобы начать играть</p>
+    <input id="nameInput" type="text" placeholder="Ваше имя" maxlength="20" autocomplete="off">
+    <button id="loginBtn">ИГРАТЬ</button>
+    <p id="loginError" class="login-error"></p>
+  </div>
+</div>
+
+<!-- ============ ЭКРАН ИГРЫ ============ -->
+<div id="gameScreen" class="screen" style="display: none;">
+  <div class="machine">
+    <h1>🎰 СЛОТ-МАШИНА</h1>
+    <p class="player-name">Игрок: <span id="playerName">—</span></p>
+
+    <div class="reels">
+      <div class="reel-column" id="col1">
+        <div class="reel">🍇</div>
+        <div class="reel">⭐</div>
+        <div class="reel active">🍒</div>
+        <div class="reel">🍊</div>
+        <div class="reel">💎</div>
+      </div>
+      <div class="reel-column" id="col2">
+        <div class="reel">🍋</div>
+        <div class="reel">🍒</div>
+        <div class="reel active">🍋</div>
+        <div class="reel">🍇</div>
+        <div class="reel">⭐</div>
+      </div>
+      <div class="reel-column" id="col3">
+        <div class="reel">🍒</div>
+        <div class="reel">💎</div>
+        <div class="reel active">🍊</div>
+        <div class="reel">⭐</div>
+        <div class="reel">🍇</div>
+      </div>
+    </div>
+
+    <div class="info">
+      <p>Баланс: <span id="balance">0</span></p>
+      <p>Ставка: <span id="bet">10</span></p>
+    </div>
+
+    <div class="payouts">
+      <div class="payout-row"><span>🍒 ×10</span><span>🍋 ×12</span></div>
+      <div class="payout-row"><span>🍊 ×15</span><span>🍇 ×20</span></div>
+      <div class="payout-row"><span>⭐ ×30</span><span>💎 ×50</span></div>
+    </div>
+
+    <button id="spinBtn">КРУТИТЬ</button>
+
+    <p id="result"></p>
+  </div>
+</div>
+
+<!-- ============ АДМИН-ПАНЕЛЬ ============ -->
+<div id="adminScreen" class="screen" style="display: none;">
+  <div class="machine">
+    <h1>👑 АДМИН</h1>
+    <p class="login-hint">Все игроки (обновляется в реальном времени)</p>
+    <div id="usersList" class="users-list">Загрузка...</div>
+    <button id="closeAdminBtn" class="small-btn">← Назад в игру</button>
+  </div>
+</div>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-database-compat.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

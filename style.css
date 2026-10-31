@@ -1,0 +1,493 @@
+/* ============ БАЗА ============ */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Orbitron', Arial, sans-serif;
+  background: radial-gradient(circle at center, #1a2a4a 0%, #0a0f1e 70%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  color: white;
+}
+
+/* ============ АВТОМАТ ============ */
+.machine {
+  background: linear-gradient(180deg, #1e2c4a 0%, #0f1729 100%);
+  padding: 35px 45px;
+  border-radius: 24px;
+  border: 3px solid #ffcc00;
+  box-shadow:
+    0 0 40px rgba(255, 204, 0, 0.35),
+    0 0 80px rgba(255, 204, 0, 0.15),
+    inset 0 0 30px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  position: relative;
+}
+
+.machine::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 24px;
+  background: linear-gradient(45deg, #ffcc00, #ff6600, #ffcc00);
+  z-index: -1;
+  opacity: 0.4;
+  filter: blur(15px);
+}
+
+h1 {
+  margin-bottom: 20px;
+  color: #ffcc00;
+  letter-spacing: 4px;
+  font-weight: 900;
+  font-size: 28px;
+  text-shadow: 0 0 10px rgba(255, 204, 0, 0.7);
+}
+
+/* ============ БАРАБАНЫ ============ */
+.reels {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin: 25px 0;
+  padding: 15px;
+  background: #080d18;
+  border-radius: 16px;
+  border: 2px solid #2a3a5a;
+  box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.8);
+}
+
+.reel-column {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.reel {
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(180deg, #f8f8f8 0%, #e0e0e0 100%);
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 38px;
+  border: 2px solid #444;
+  opacity: 0.3;
+  transition: opacity 0.3s, box-shadow 0.3s;
+  box-shadow: inset 0 -3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.reel.active {
+  opacity: 1;
+  border-color: #ffcc00;
+  box-shadow:
+    0 0 12px rgba(255, 204, 0, 0.8),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.reel-column.spinning .reel {
+  animation: shake 0.15s infinite;
+  filter: blur(1px);
+  background: linear-gradient(180deg, #fff8d6 0%, #ffe98a 100%);
+}
+
+@keyframes shake {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-5px); }
+  100% { transform: translateY(0); }
+}
+
+/* ============ ИНФО ============ */
+.info {
+  display: flex;
+  justify-content: space-around;
+  font-size: 16px;
+  margin: 15px 0;
+  gap: 15px;
+}
+
+.info p {
+  background: #080d18;
+  padding: 8px 16px;
+  border-radius: 10px;
+  border: 1px solid #2a3a5a;
+}
+
+.info span {
+  color: #ffcc00;
+  font-weight: 700;
+}
+
+/* ============ ТАБЛИЦА ВЫПЛАТ ============ */
+.payouts {
+  background: #080d18;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 14px;
+  color: #ffcc00;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border: 1px solid #2a3a5a;
+}
+
+.payout-row {
+  display: flex;
+  justify-content: space-around;
+}
+
+/* ============ КНОПКИ ============ */
+#spinBtn {
+  padding: 16px 60px;
+  font-size: 22px;
+  font-weight: 900;
+  font-family: 'Orbitron', Arial, sans-serif;
+  letter-spacing: 3px;
+  cursor: pointer;
+  background: linear-gradient(180deg, #ffd633 0%, #ffaa00 100%);
+  color: #1a1a2e;
+  border: none;
+  border-radius: 12px;
+  box-shadow:
+    0 6px 0 #b37700,
+    0 8px 20px rgba(255, 170, 0, 0.5);
+  transition: all 0.1s;
+}
+
+#spinBtn:hover {
+  background: linear-gradient(180deg, #ffe066 0%, #ffbb00 100%);
+}
+
+#spinBtn:active {
+  transform: translateY(4px);
+  box-shadow:
+    0 2px 0 #b37700,
+    0 4px 10px rgba(255, 170, 0, 0.5);
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.small-btn {
+  padding: 8px 18px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: 'Orbitron', Arial, sans-serif;
+  cursor: pointer;
+  background: #2a3a5a;
+  color: #ffcc00;
+  border: 2px solid #ffcc00;
+  border-radius: 8px;
+  transition: all 0.15s;
+}
+
+.small-btn:hover {
+  background: #ffcc00;
+  color: #1a1a2e;
+}
+
+.small-btn:active {
+  transform: scale(0.95);
+}
+
+/* ============ РЕЗУЛЬТАТ ============ */
+#result {
+  font-size: 18px;
+  font-weight: 700;
+  min-height: 30px;
+  margin-top: 20px;
+  color: #ffcc00;
+  text-shadow: 0 0 10px rgba(255, 204, 0, 0.7);
+}
+
+/* ============ АДАПТИВ ПОД ТЕЛЕФОН ============ */
+@media (max-width: 600px) {
+  .machine {
+    padding: 20px 15px;
+    border-radius: 16px;
+  }
+
+  h1 {
+    font-size: 20px;
+    letter-spacing: 2px;
+  }
+
+  .reels {
+    gap: 5px;
+    padding: 10px;
+  }
+
+  .reel {
+    width: 55px;
+    height: 55px;
+    font-size: 30px;
+  }
+
+  .reel-column {
+    gap: 4px;
+  }
+
+  #spinBtn {
+    padding: 14px 40px;
+    font-size: 18px;
+    letter-spacing: 2px;
+  }
+
+  .info {
+    font-size: 13px;
+    gap: 8px;
+  }
+
+  .info p {
+    padding: 6px 10px;
+  }
+
+  .payouts {
+    font-size: 12px;
+  }
+}
+/* ============ КНОПКА MUTE ============ */
+#muteBtn {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(42, 58, 90, 0.85);
+  color: #ffcc00;
+  border: 2px solid #ffcc00;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 100;
+  transition: all 0.15s;
+}
+
+#muteBtn:hover {
+  background: #ffcc00;
+  color: #1a1a2e;
+}
+
+#muteBtn:active {
+  transform: scale(0.9);
+}
+
+/* ============ ЭФФЕКТ ПОБЕДЫ ============ */
+.machine.win {
+  animation: winFlash 0.5s ease-in-out 4;
+}
+
+@keyframes winFlash {
+  0%, 100% {
+    box-shadow:
+      0 0 40px rgba(255, 204, 0, 0.35),
+      0 0 80px rgba(255, 204, 0, 0.15),
+      inset 0 0 30px rgba(0, 0, 0, 0.5);
+  }
+  50% {
+    box-shadow:
+      0 0 60px rgba(255, 204, 0, 1),
+      0 0 120px rgba(255, 204, 0, 0.6),
+      inset 0 0 30px rgba(255, 100, 0, 0.3);
+  }
+}
+
+/* ============ ЭФФЕКТ ДЖЕКПОТА ============ */
+.machine.jackpot {
+  animation:
+    jackpotShake 0.5s ease-in-out infinite,
+    winFlash 0.4s ease-in-out infinite;
+}
+
+@keyframes jackpotShake {
+  0%, 100% { transform: translate(0, 0) rotate(0); }
+  25%      { transform: translate(-2px, 1px) rotate(-0.4deg); }
+  75%      { transform: translate(2px, -1px) rotate(0.4deg); }
+}
+
+#result.jackpot {
+  font-size: 22px;
+  color: #ff4400;
+  animation: textPulse 0.5s ease-in-out infinite;
+}
+
+@keyframes textPulse {
+  0%, 100% {
+    transform: scale(1);
+    text-shadow: 0 0 20px rgba(255, 68, 0, 0.8);
+  }
+  50% {
+    transform: scale(1.08);
+    text-shadow:
+      0 0 40px rgba(255, 68, 0, 1),
+      0 0 60px rgba(255, 204, 0, 1);
+  }
+}
+/* ============ ЭКРАНЫ ============ */
+.screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  width: 100%;
+}
+
+/* ============ ЛОГИН ============ */
+.login-hint {
+  margin: 15px 0;
+  color: #aaa;
+  font-size: 14px;
+}
+
+#nameInput {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 16px;
+  font-family: 'Orbitron', Arial, sans-serif;
+  background: #080d18;
+  color: white;
+  border: 2px solid #2a3a5a;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+#nameInput:focus {
+  border-color: #ffcc00;
+}
+
+#loginBtn {
+  padding: 14px 40px;
+  font-size: 18px;
+  font-weight: 900;
+  font-family: 'Orbitron', Arial, sans-serif;
+  letter-spacing: 2px;
+  cursor: pointer;
+  background: linear-gradient(180deg, #ffd633 0%, #ffaa00 100%);
+  color: #1a1a2e;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 0 #b37700;
+  width: 100%;
+  transition: all 0.1s;
+}
+
+#loginBtn:hover {
+  background: linear-gradient(180deg, #ffe066 0%, #ffbb00 100%);
+}
+
+#loginBtn:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #b37700;
+}
+
+#loginBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.login-error {
+  color: #ff5555;
+  margin-top: 10px;
+  font-size: 14px;
+  min-height: 20px;
+}
+
+/* ============ ИМЯ ИГРОКА ============ */
+.player-name {
+  color: #aaa;
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.player-name span {
+  color: #ffcc00;
+  font-weight: 700;
+}
+
+/* ============ АДМИН ============ */
+#adminToggleBtn {
+  position: fixed;
+  top: 15px;
+  right: 70px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(42, 58, 90, 0.85);
+  color: #ffcc00;
+  border: 2px solid #ffcc00;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 100;
+  transition: all 0.15s;
+}
+
+#adminToggleBtn:hover {
+  background: #ffcc00;
+}
+
+.users-list {
+  max-height: 400px;
+  overflow-y: auto;
+  margin: 15px 0;
+  background: #080d18;
+  border-radius: 10px;
+  padding: 10px;
+  min-width: 280px;
+}
+
+.user-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #2a3a5a;
+  font-size: 14px;
+}
+
+.user-row:last-child {
+  border-bottom: none;
+}
+
+.user-name {
+  color: #ffcc00;
+  font-weight: 700;
+  flex: 1;
+  text-align: left;
+}
+
+.user-balance {
+  color: #ccc;
+  margin: 0 10px;
+}
+
+.user-add-btn {
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  background: #ffcc00;
+  color: #1a1a2e;
+  border: none;
+  border-radius: 6px;
+  transition: all 0.15s;
+}
+
+.user-add-btn:hover {
+  background: #ffd633;
+  transform: scale(1.05);
+}
